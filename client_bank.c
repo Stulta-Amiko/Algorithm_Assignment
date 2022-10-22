@@ -61,8 +61,9 @@ int main(){
     init_queue(&VIP_queue);
     srand(time(NULL));
     for(int clock=0;clock<minutes;clock++){
-        //printf("현재시각 %d\n",clock);
-        if(rand()%10<1){
+        printf("현재시각 %d\n",clock);
+        int percentage = rand()%10;
+        if(percentage<1){
             element VIP;
             VIP.is_VIP = 1;
             VIP.arrival_time = clock;
@@ -70,8 +71,8 @@ int main(){
             VIP_customers++;
             VIP.service_time = rand()%3+1;
             enqueue(&VIP_queue,VIP);
-            //printf("VIP 고객 %d가 %d분에 들어옵니다 업무처리시간 %d분\n",VIP.id,VIP.arrival_time,VIP.service_time);
-        }else if(rand()%10>0 && rand()%10<3){
+            printf("VIP 고객 %d가 %d분에 들어옵니다 업무처리시간 %d분\n",VIP.id,VIP.arrival_time,VIP.service_time);
+        }else if(percentage>0 && percentage<3){
             element gen_customer;
             gen_customer.is_VIP = 0;
             gen_customer.arrival_time = clock;
@@ -79,7 +80,7 @@ int main(){
             gen_customers++;
             gen_customer.service_time = rand()%3+1; 
             enqueue(&general_queue,gen_customer);
-            //printf("일반 고객 %d가 %d분에 들어옵니다 업무처리시간 %d분\n",gen_customer.id,gen_customer.arrival_time,gen_customer.service_time);
+            printf("일반 고객 %d가 %d분에 들어옵니다 업무처리시간 %d분\n",gen_customer.id,gen_customer.arrival_time,gen_customer.service_time);
         }
         if(service_time>0){
             //printf("고객 %d 업무처리중입니다. \n",service_customer);
@@ -90,8 +91,8 @@ int main(){
                     service_customer = VIP_customer.id;
                     service_time = VIP_customer.service_time;
                     VIP_service_time = VIP_customer.service_time; 
-                    /*printf("VIP 고객 %d이 %d분에 업무 시작, 대기시간은 %d분.\n",
-                    VIP_customer.id, clock, clock - VIP_customer.arrival_time); */
+                    printf("VIP 고객 %d이 %d분에 업무 시작, 대기시간은 %d분.\n",
+                    VIP_customer.id, clock, clock - VIP_customer.arrival_time); 
                     total_wait += clock - VIP_customer.arrival_time;
                     VIP_wait += clock - VIP_customer.arrival_time;
             }else if(is_empty(&VIP_queue)&&!is_empty(&general_queue)){
@@ -99,8 +100,8 @@ int main(){
                     service_customer = gen_customer.id;
                     service_time = gen_customer.service_time;
                     gen_service_time = gen_customer.service_time;
-                    /*printf("일반 고객 %d이 %d분에 업무 시작, 대기시간은 %d분.\n",
-                    gen_customer.id, clock, clock - gen_customer.arrival_time); */
+                    printf("일반 고객 %d이 %d분에 업무 시작, 대기시간은 %d분.\n",
+                    gen_customer.id, clock, clock - gen_customer.arrival_time);
                     total_wait += clock - gen_customer.arrival_time; 
                     gen_wait += clock - gen_customer.arrival_time; 
             }
