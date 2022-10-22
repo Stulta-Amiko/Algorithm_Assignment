@@ -47,6 +47,9 @@ void fibo(int a){
     }
 }
 int main(){
-    fibo(10);
+    int input;
+    printf("수를 입력해주세요: ");
+    scanf("%d",&input);
+    fibo(input);
     return 0;
 }
