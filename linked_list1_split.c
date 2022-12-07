@@ -99,6 +99,10 @@ int main(){
         cnt++;
         tmp = tmp->link;
     }
+    if(cnt != input){
+        printf("입력값과 입력한 숫자의 갯수가 일치하지 않습니다.");
+        return 0;
+    }
     b = reverse(b);
     f = reverse(f);
     d = reverse(d);

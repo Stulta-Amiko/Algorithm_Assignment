@@ -48,6 +48,29 @@ void print_list(Listnode *head){
     printf("\n");
 }
 
+Listnode* searchlist(Listnode *head,int value){
+    Listnode *p = head;
+    while(p != NULL){
+        if(p->data == value)
+            return p;
+        p = p->link;
+    }
+    return NULL;
+}
+
+Listnode* concatlsit(Listnode *first,Listnode *second){
+    if(first == NULL)return second;
+    else if(second == NULL)return second;
+    else{
+        Listnode *p;
+        while(p->link != NULL)
+            p = p->link;
+        p->link = second;
+        return first;
+    }
+    return NULL;
+}
+
 int main(){
     Listnode *head = NULL;
     for (int i = 0; i < 5; i++) {
